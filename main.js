@@ -2,20 +2,26 @@
 const mentors = [
   {
     id: 1,
-    name: "Dr. Manoj Kumar Sachan",
-    expertise: "Computer Networks, Network Security",
+    name: "Dr. Birmohan Singh",
+    Educational_Qualification: "Computer Networks, Network Security",
+    Phone : "+91-1672-253208",
+    Email: "birmohansingh@sliet.ac.in , birmohans@gmail.com",
     availableSlots: ["10:00 AM", "2:00 PM", "4:00 PM"]
   },
   {
     id: 2,
     name: "Dr. Birmohan Singh",
-    expertise: "Artificial Intelligence, Machine Learning",
+    Educational_Qualification: "Computer Networks, Network Security",
+    Phone : "+91-1672-253208",
+    Email: "birmohansingh@sliet.ac.in , birmohans@gmail.com",
     availableSlots: ["11:00 AM", "3:00 PM", "5:00 PM"]
   },
   {
     id: 3,
     name: "Dr. Damanpreet Singh",
-    expertise: "Database Management Systems, Big Data",
+    Educational_Qualification: "Computer Networks, Network Security",
+    Phone : "+91-1672-253208",
+    Email: "birmohansingh@sliet.ac.in , birmohans@gmail.com",
     availableSlots: ["9:00 AM", "1:00 PM", "3:00 PM"]
   }
 ];
@@ -30,8 +36,9 @@ function createMentorCards() {
     card.className = 'mentor-card';
     card.innerHTML = `
       <h3>${mentor.name}</h3>
-      <p><strong>Expertise:</strong> ${mentor.expertise}</p>
-      <p><strong>Available Slots:</strong> ${mentor.availableSlots.join(', ')}</p>
+      <p><strong>Educational_Qualification:</strong> ${mentor.Educational_Qualification}</p>
+      <p><strong>Phone:</strong> ${mentor.Phone}</p>
+      <p><strong>Email:</strong> ${mentor.Email}</p>
     `;
     mentorList.appendChild(card);
   });
