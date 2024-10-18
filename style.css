@@ -13,7 +13,7 @@
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   line-height: 1.6;
   color: var(--text-color);
   background-color: var(--background-color);
@@ -57,17 +57,15 @@ body {
 
 .sidebar nav ul li a:hover,
 .sidebar nav ul li a.active {
-  color: var(--primary-color); 
+  color: var(--primary-color);
   font-style: oblique;
   font-weight: bold;
-  background-color: #fff; 
-  transform: translateX(15px); 
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); 
-  border-radius: 20px; 
-  overflow: visible; 
+  background-color: #fff;
+  transform: translateX(15px);
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  overflow: visible;
 }
-
-
 
 main {
   flex: 1;
@@ -79,7 +77,8 @@ header {
   margin-bottom: 2rem;
 }
 
-h2, h3 {
+h2,
+h3 {
   color: var(--primary-color);
   margin-bottom: 1rem;
 }
@@ -265,6 +264,33 @@ section {
 #chat-form button:hover {
   background-color: #d50000;
 }
+#info {
+  background-color: #f9f9f9;
+  border-left: 4px solid #3f51b5;
+  padding: 20px;
+  margin: 20px 0;
+  border-radius: 8px;
+}
+
+#info h3 {
+  color: #3f51b5;
+  font-family: "Arial", sans-serif;
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+#info p {
+  color: #333;
+  font-family: "Arial", sans-serif;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+#info p strong {
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: #0073e6;
+}
 
 @media (max-width: 768px) {
   #app {
@@ -294,4 +320,30 @@ section {
     height: 50vh;
     bottom: 80px;
   }
+}
+/* Style for collapsed and expanded content */
+.collapsed {
+  height: 100px;
+  overflow: hidden;
+  transition: height 0.3s ease-in-out;
+}
+
+.expanded {
+  height: auto;
+}
+
+/* Style for the toggle button */
+#toggle-info-btn {
+  background-color: #0073e6;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 1rem;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+#toggle-info-btn:hover {
+  background-color: #005bb5;
 }

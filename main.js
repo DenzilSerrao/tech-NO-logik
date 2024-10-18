@@ -131,3 +131,48 @@ function init() {
 
 // Run the initialization when the DOM is fully loaded
 document.addEventListener('DOMContentLoaded', init);
+document.addEventListener("DOMContentLoaded", function () {
+  // The full content to be dynamically added with clear spacing and readability
+  const fullContent = `
+    <p>
+      The Department of Computer Science & Engineering (CSE) is dedicated to ensuring great careers for its students. For us, this means forging deeper industry linkages than ever before, creating a research culture from day one, and ensuring seamless education using the best technology available anywhere.
+    </p>
+    <p>
+      The excellent infrastructure, teaching faculty of the best kind of the Department ensures quality education such as interaction among students, parents, and staff. Along with a Training and Placement Cell, we ensure a bright future for our students.
+    </p>
+    <p>
+      We strongly encourage innovation in research, in teaching, and in service to the profession, the local community, and industry. Our faculty and students constantly strive to excel and advance the state of the art in Computer Science and Engineering.
+    </p>
+    <p>
+      I invite you to be part of our efforts as we propel the Department of Computer Science & Engineering to ever-greater heights.
+    </p>
+    <p>
+      In closing, I wish all the students and faculty a good academic career.
+    </p>
+    <p><strong>Sincerely, and with best wishes,<br>Prof. Birmohan Singh</strong></p>
+  `;
+
+  // Reference to the content and button
+  const infoContent = document.getElementById("info-content");
+  const toggleBtn = document.getElementById("toggle-info-btn");
+
+  // Load the initial content (first 200 characters with ellipsis)
+  infoContent.innerHTML = fullContent.substring(0, 200) + "...";
+
+  // Toggle function for expanding and collapsing content
+  toggleBtn.addEventListener("click", function () {
+    if (infoContent.classList.contains("collapsed")) {
+      // Expand content with full HTML
+      infoContent.innerHTML = fullContent;
+      infoContent.classList.remove("collapsed");
+      infoContent.classList.add("expanded");
+      toggleBtn.textContent = "Read Less";
+    } else {
+      // Collapse content
+      infoContent.innerHTML = fullContent.substring(0, 200) + "...";
+      infoContent.classList.remove("expanded");
+      infoContent.classList.add("collapsed");
+      toggleBtn.textContent = "Read More";
+    }
+  });
+});
