@@ -84,25 +84,6 @@ main {
   flex-grow: 1;
 }
 
-.login-signup-container {
-  display: flex;
-  gap: 20px;
-}
-
-.login-signup {
-  padding: 10px 20px;
-  color: var(--primary-color);
-  cursor: pointer;
-  border-radius: 5px;
-  transition: background-color 0.3s ease, transform 0.3s ease; 
-}
-
-.login-signup:hover {
-  background-color: var(--primary-color); 
-  color: #fff; 
-  transform: scale(1.05); 
-}
-
 .more-info {
   background-color: white;
   border-radius: 8px;
@@ -292,6 +273,21 @@ section {
 
 #booking-form button:hover {
   background-color: #d50000;
+}
+
+.booking{
+  flex: 1; /* Allows the .more-info section to take up the remaining space */
+  padding: 20px; /* Adds some padding to the section */
+  overflow: auto; /* Ensures content is scrollable if it exceeds the viewport */
+}
+
+.booking-card {
+  width: 100%; /* Makes the card occupy the full width of the parent */
+  border: 1px solid var(--primary-color);
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px 0;
+  background-color: #f5f5f5;
 }
 
 #chat-icon {

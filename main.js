@@ -153,9 +153,8 @@ function createMentorCards() {
       <p><strong>Email:</strong> ${mentor.Email}</p>
     `;
     
-    // Add event listener to direct to #booking when a card is clicked
     card.addEventListener('click', () => {
-      window.location.href = '#booking'; // Navigate to the booking section
+      window.location.href = 'booking.html'; // Navigate to the booking section
     });
 
     mentorList.appendChild(card); // Append the card to the mentor list
@@ -212,14 +211,98 @@ function handleBookingSubmit(event) {
   const studentName = document.getElementById('student-name').value;
   const studentEmail = document.getElementById('student-email').value;
 
-  // In a real application, you would send this data to a server
-  console.log('Booking submitted:', { mentorId, date, time, studentName, studentEmail });
+  // Create a booking object
+  const booking = {
+      mentorId,
+      date,
+      time,
+      studentName,
+      studentEmail,
+      mentorName: mentors.find(m => m.id === parseInt(mentorId)).name // Assuming you have a mentor object to fetch the name
+  };
+
+  // Get existing bookings from local storage
+  const bookings = JSON.parse(localStorage.getItem('bookings')) || [];
+  bookings.push(booking); // Add the new booking
+
+  // Save back to local storage
+  localStorage.setItem('bookings', JSON.stringify(bookings));
 
   // Show a confirmation message
   alert('Your session has been booked successfully!');
 
-  // Reset the form
+  // Reset the form and refresh bookings display
   event.target.reset();
+  displayBookings();
+}
+
+
+function handleCancelBooking(event) {
+  const index = event.target.getAttribute('data-index'); // Get the index from the button
+  const bookings = JSON.parse(localStorage.getItem('bookings')) || [];
+
+  // Remove the booking at the specified index
+  bookings.splice(index, 1);
+  localStorage.setItem('bookings', JSON.stringify(bookings)); // Save updated bookings back to local storage
+
+  // Refresh the displayed bookings
+  displayBookings();
+}
+
+function displayBookings() {
+  const bookingCardsContainer = document.getElementById('booking-cards');
+  bookingCardsContainer.innerHTML = ''; // Clear previous bookings
+
+  // Retrieve bookings from localStorage
+  const bookings = JSON.parse(localStorage.getItem('bookings')) || [];
+
+  if (bookings.length === 0) {
+    bookingCardsContainer.innerHTML = '<p style="text-align: center;">You have not booked any sessions.</p>';
+  } else {
+    bookings.forEach((booking, index) => {
+      const bookingCard = document.createElement('div');
+      bookingCard.classList.add('booking-card');
+      const mentor = mentors.find(m => m.id == booking.mentorId); // Fetch mentor details
+      bookingCard.innerHTML = `
+        <h4>Mentor: ${mentor.name}</h4>
+        <p>Date: ${booking.date}</p>
+        <p>Time: ${booking.time}</p>
+        <p>Name: ${booking.studentName}</p>
+        <p>Email: ${booking.studentEmail}</p>
+        <button class="cancel-button" data-index="${index}">Cancel Booking</button>
+      `;
+      bookingCardsContainer.appendChild(bookingCard);
+    });
+    const cancelButtons = document.querySelectorAll('.cancel-button');
+    cancelButtons.forEach(button => {
+      button.addEventListener('click', handleCancelBooking);
+    });
+  }
+}
+  
+
+function initBookingPage() {
+  if (document.getElementById('mentor-select')) {
+    populateMentorSelect(); // Populate the mentor dropdown
+    document.getElementById('mentor-select').addEventListener('change', updateTimeSlots);
+  } else {
+    console.error("Mentor select dropdown not found.");
+  }
+
+  if (document.getElementById('booking-form')) {
+    const bookingForm = document.getElementById('booking-form');
+    bookingForm.addEventListener('submit', handleBookingSubmit);
+  } else {
+    console.error("Booking form not found.");
+  }
+
+  displayBookings(); // Call this after setting up the event listeners
+}
+
+
+// Run initBookingPage only on booking.html
+if (window.location.pathname.endsWith('booking.html')) {
+  initBookingPage();
 }
 
 // Function to toggle chat interface
@@ -255,22 +338,21 @@ function handleChatSubmit(event) {
 // Initialize the application
 function init() {
   createMentorCards();
-  populateMentorSelect();
-  createMentorCards();
-
+  window.onload = init;
   // Event listeners
   document.getElementById('left-arrow').addEventListener('click', () => handleArrowClick('prev'));
   document.getElementById('right-arrow').addEventListener('click', () => handleArrowClick('next'));
-  document.getElementById('mentor-select').addEventListener('change', updateTimeSlots);
-  document.getElementById('booking-form').addEventListener('submit', handleBookingSubmit);
   document.getElementById('chat-icon').addEventListener('click', toggleChatInterface);
   document.getElementById('close-chat').addEventListener('click', toggleChatInterface);
   document.getElementById('chat-form').addEventListener('submit', handleChatSubmit);
+  document.getElementById('mentor-select').addEventListener('change', updateTimeSlots);
+  document.getElementById('booking-form').addEventListener('submit', handleBookingSubmit);
 }
 
 // Run the initialization when the DOM is fully loaded
 document.addEventListener('DOMContentLoaded', init);
 document.addEventListener("DOMContentLoaded", function () {
+  initBookingPage();
   // The full content to be dynamically added with clear spacing and readability
   const fullContent = `
     <p>

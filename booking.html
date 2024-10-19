@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>SLIET Mentorship Platform</title>
+        <link rel="stylesheet" href="style.css">
+      </head>
+<body>
+    <div id="app">
+    <aside class="sidebar">
+        <h1>SLIET Mentorship</h1>
+        <nav>
+          <ul>
+            <li><a href="index.html">Info</a></li>
+            <li><a href="booking.html" class="active">Bookings</a></li>
+            <li><a href="#material">Material</a></li>
+            <li><a href="#settings">Settings</a></li>
+          </ul>
+        </nav>
+      </aside>
+    <section id="booking">
+        <h3>Book a Mentorship Session</h3>
+        <form id="booking-form">
+          <label for="mentor-select">Select a Mentor:</label>
+          <select id="mentor-select" required></select>
+
+          <label for="date-select">Select a Date:</label>
+          <input type="date" id="date-select" required>
+
+          <label for="time-select">Select a Time Slot:</label>
+          <select id="time-select" required></select>
+
+          <label for="student-name">Your Name:</label>
+          <input type="text" id="student-name" required>
+
+          <label for="student-email">Your Email:</label>
+          <input type="email" id="student-email" required>
+
+          <button type="submit">Book Session</button>
+        </form>
+    </section>
+    <section class="booking">
+        <h3 class="info">Your Bookings</h3>
+        <div id="booking-cards"></div> 
+    </section>  
+</div>
+    <script type="module" src="/main.js"></script>
+</body>
+</html>
