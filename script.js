@@ -332,6 +332,7 @@ function displayBookings() {
   
 
 function initBookingPage() {
+  initTheme();
   if (document.getElementById('mentor-select')) {
     populateMentorSelect(); // Populate the mentor dropdown
     document.getElementById('mentor-select').addEventListener('change', updateTimeSlots);
@@ -354,8 +355,15 @@ function initBookingPage() {
 if (window.location.pathname.endsWith('booking.html')) {
   initBookingPage();
 }
+// Run initBookingPage only on booking.html
+if (window.location.pathname.endsWith('material.html')) {
+  initTheme();
+}
 
 function initSettingsPage() {
+  // Initialize the theme based on saved preference
+  initTheme();
+
   // Password change functionality
   document.getElementById('changePasswordButton').addEventListener('click', function() {
     const newPassword = prompt("Enter your new password:");
@@ -366,30 +374,42 @@ function initSettingsPage() {
   });
 
   // Function to change theme based on selected option
-  
   document.querySelectorAll('.settings-theme').forEach(themeOption => {
-  themeOption.addEventListener('click', function() {
-    const selectedTheme = this.getAttribute('data-theme');
-    switch (selectedTheme) {
-        case 'dark':
-          document.documentElement.style.setProperty('--primary-color', '#333333'); 
-          document.documentElement.style.setProperty('--secondary-color', '#444444');
-          document.body.style.backgroundColor = '#121212'; 
-          break;
-        case 'colorful':
-          document.documentElement.style.setProperty('--primary-color', '#ff5722'); 
-          document.documentElement.style.setProperty('--secondary-color', '#ffc107'); 
-          document.body.style.backgroundColor = '#ffffff';
-
-          break;
-        default:
-          document.documentElement.style.setProperty('--primary-color', '#3f51b5'); 
-          document.documentElement.style.setProperty('--secondary-color', '#f50057'); 
-          document.body.style.backgroundColor = '#f4f4f4';
-      }
+    themeOption.addEventListener('click', function() {
+      const selectedTheme = this.getAttribute('data-theme');
+      applyTheme(selectedTheme);
     });
   });
 }
+
+// Function to initialize theme based on localStorage
+function initTheme() {
+  const savedTheme = localStorage.getItem('theme') || 'default';
+  applyTheme(savedTheme);
+}
+
+function applyTheme(selectedTheme) {
+  switch (selectedTheme) {
+    case 'dark':
+      document.documentElement.style.setProperty('--primary-color', '#333333'); // Dark primary color
+      document.documentElement.style.setProperty('--secondary-color', '#444444'); // Dark secondary color
+      document.body.style.backgroundColor = '#121212'; // Dark background
+      break;
+    case 'colorful':
+      document.documentElement.style.setProperty('--primary-color', '#ff5722'); // Colorful primary color
+      document.documentElement.style.setProperty('--secondary-color', '#ffc107'); // Colorful secondary color
+      document.body.style.backgroundColor = '#ffffff'; // Colorful background
+      break;
+    default:
+      document.documentElement.style.setProperty('--primary-color', '#3f51b5'); // Default primary color
+      document.documentElement.style.setProperty('--secondary-color', '#f50057'); // Default secondary color
+      document.body.style.backgroundColor = '#f4f4f4'; // Default background
+  }
+
+  // Save the selected theme in local storage
+  localStorage.setItem('theme', selectedTheme);
+}
+
 
 // Call the function if the current page is settings.html
 if (window.location.pathname.endsWith('settings.html')) {
@@ -430,6 +450,8 @@ function handleChatSubmit(event) {
 // Initialize the application
 function init() {
   createMentorCards();
+  initSettingsPage();
+
   const loginModal = document.getElementById('login-modal');
   const closeModalButton = document.getElementById('close-modal');
   const loginForm = document.getElementById('login-form');
