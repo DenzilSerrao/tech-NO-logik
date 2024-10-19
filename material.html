@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SLIET Mentorship Platform</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="material-container">
+    <h2>Upload Study Materials (PDF)</h2>
+    <form id="uploadForm" enctype="multipart/form-data">
+      <div class="input-group">
+        <label for="fileInput">Select PDF File:</label>
+        <input type="file" id="fileInput" accept="application/pdf" required>
+      </div>
+      <button type="submit">Upload</button>
+    </form>
+
+    <div class="material-list">
+      <h3>Available Materials</h3>
+      <ul id="materials">
+        <!-- Dynamically added PDFs will appear here -->
+      </ul>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
