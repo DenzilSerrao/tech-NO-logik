@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+            <aside class="sidebar">
+            <h1>SLIET Mentorship</h1>
+            <nav>
+              <ul>
+                <li><a href="index.html">Info</a></li>
+                <li><a href="booking.html">Bookings</a></li>
+                <li><a href="material.html">Material</a></li>
+                <li><a href="settings.html" class="active">Settings</a></li>
+              </ul>
+            </nav>
+          </aside>
+          <div class="settings-container">
+            <h2>Profile Settings</h2>
+            <div class="settings-profile-details">
+                <p><strong>Username:</strong> <span id="usernameDisplay">JohnDoe</span></p>
+                <p><strong>Email:</strong> <span id="emailDisplay">johndoe@example.com</span></p>
+            </div>
+        
+            <button id="changePasswordButton" class="settings-button">Change Password</button>
+        
+            <h3>Change Theme</h3>
+            <div class="settings-theme-options">
+                <div class="settings-theme" data-theme="default">
+                    <div class="theme-icon" style="background-color: var(--primary-color);"></div>
+                    <p>Default</p>
+                </div>
+                <div class="settings-theme" data-theme="dark">
+                    <div class="theme-icon" style="background-color: #333333;"></div>
+                    <p>Dark</p>
+                </div>
+                <div class="settings-theme" data-theme="colorful">
+                    <div class="theme-icon" style="background-color: #ff5722;"></div>
+                    <p>Colorful</p>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

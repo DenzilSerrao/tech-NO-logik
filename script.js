@@ -355,6 +355,48 @@ if (window.location.pathname.endsWith('booking.html')) {
   initBookingPage();
 }
 
+function initSettingsPage() {
+  // Password change functionality
+  document.getElementById('changePasswordButton').addEventListener('click', function() {
+    const newPassword = prompt("Enter your new password:");
+    if (newPassword) {
+      // Handle password change logic here (e.g., send to server)
+      alert("Password changed successfully!");
+    }
+  });
+
+  // Function to change theme based on selected option
+  
+  document.querySelectorAll('.settings-theme').forEach(themeOption => {
+  themeOption.addEventListener('click', function() {
+    const selectedTheme = this.getAttribute('data-theme');
+    switch (selectedTheme) {
+        case 'dark':
+          document.documentElement.style.setProperty('--primary-color', '#333333'); 
+          document.documentElement.style.setProperty('--secondary-color', '#444444');
+          document.body.style.backgroundColor = '#121212'; 
+          break;
+        case 'colorful':
+          document.documentElement.style.setProperty('--primary-color', '#ff5722'); 
+          document.documentElement.style.setProperty('--secondary-color', '#ffc107'); 
+          document.body.style.backgroundColor = '#ffffff';
+
+          break;
+        default:
+          document.documentElement.style.setProperty('--primary-color', '#3f51b5'); 
+          document.documentElement.style.setProperty('--secondary-color', '#f50057'); 
+          document.body.style.backgroundColor = '#f4f4f4';
+      }
+    });
+  });
+}
+
+// Call the function if the current page is settings.html
+if (window.location.pathname.endsWith('settings.html')) {
+  initSettingsPage();
+}
+
+
 // Function to toggle chat interface
 function toggleChatInterface() {
   const chatInterface = document.getElementById('chat-interface');

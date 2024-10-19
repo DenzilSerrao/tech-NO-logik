@@ -24,7 +24,7 @@ This project implements a login modal that allows users to enter their credentia
 
 - `index.html`: Contains the main structure of the webpage including the modal, form, and welcome message.
 - `styles.css`: Styles for the modal, login form, buttons, and other UI elements.
-- `main.js`: Handles the logic for showing/hiding the modal, form submission, session management, and UI updates.
+- `script.js`: Handles the logic for showing/hiding the modal, form submission, session management, and UI updates.
 
 ## Setup and Installation
 
@@ -36,14 +36,19 @@ To use this project:
 
 ## Usage
 
-    When the page loads, the login modal will appear.
-    Enter your username and password (you can set up further validation if needed).
-    After successful login, the modal will close, and the welcome message will be updated to "Welcome, [Username]".
-    If you navigate to another page within the project, the modal will not appear again unless you log out.
-    Click the Logout button to reset the session, clearing the username and showing the login modal again upon reload.
+  -  When the page loads, the login modal will appear.
+  -  Enter your username and password (you can set up further validation if needed).
+  -  After successful login, the modal will close, and the welcome message will be updated to "Welcome, [Username]".
+  -  If you navigate to another page within the project, the modal will not appear again unless you log out.
+  -  Click the Logout button to reset the session, clearing the username and showing the login modal again upon reload.
+  -  The Info page contains Details about the Platform and the College
+  -  The Mentor cards con be cycled through using the arrow on either side.
+  -  Clicking on the Mentor cards will direct you to the Booking website.
+  -  On here you can Enter your details and the Mentor you want to book a Session with.
+  -   
 
 ## Customization
 
-    Modal Design: You can customize the look and feel of the modal by modifying the styles in styles.css.
-    Form Fields: Add or remove fields from the login form by editing the HTML in index.html.
-    Session Storage: The project uses sessionStorage to keep the user logged in. If you want the session to persist even after closing the browser, you can switch to localStorage.
+  -  Modal Design: You can customize the look and feel of the modal by modifying the styles in styles.css.
+  -  Form Fields: Add or remove fields from the login form by editing the HTML in index.html.
+  -  Session Storage: The project uses sessionStorage to keep the user logged in. If you want the session to persist even after closing the browser, you can switch to localStorage.
