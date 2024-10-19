@@ -148,9 +148,6 @@ function handleLogin(event) {
   // Get the username from the form (assuming there's an input with id 'username')
   const username = document.getElementById('username').value;
 
-  // Add your login logic here (e.g., validate user credentials)
-  alert('Logged in!'); 
-
   // Save the username to sessionStorage
   sessionStorage.setItem('username', username);
 
