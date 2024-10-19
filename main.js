@@ -130,6 +130,59 @@ const mentors = [
   }
 ];
 
+function showLoginModal(modal) {
+  modal.style.display = 'block';
+}
+
+// Function to attach event listeners for closing the modal
+function attachCloseModalListeners(modal, closeButton) {
+  // Close the modal when the close button is clicked
+  closeButton.addEventListener('click', () => {
+      modal.style.display = 'none';
+  });
+}
+
+function handleLogin(event) {
+  event.preventDefault(); 
+
+  // Get the username from the form (assuming there's an input with id 'username')
+  const username = document.getElementById('username').value;
+
+  // Add your login logic here (e.g., validate user credentials)
+  alert('Logged in!'); 
+
+  // Save the username to sessionStorage
+  sessionStorage.setItem('username', username);
+
+  // Update the welcome message
+  updateWelcomeMessage(username);
+  // Close modal on successful login
+  const loginModal = document.getElementById('login-modal');
+  loginModal.style.display = 'none';
+}
+
+function updateWelcomeMessage(username) {
+  const welcomeMessage = document.querySelector('.welcome');
+  if (welcomeMessage) {
+      welcomeMessage.textContent = `Welcome, ${username}`;
+  }
+}
+
+// Function to attach the event listener for the login form submission
+function attachLoginFormListener(form, modal) {
+  form.addEventListener('submit', handleLogin);
+}
+
+// Function to handle user logout
+function handleLogout() {
+
+  sessionStorage.removeItem('username'); 
+
+  sessionStorage.clear();  // This will remove all stored session data
+
+  window.location.reload(); // Reloads the current page
+}
+
 // Constants for pagination
 const mentorsPerPage = 8; // Maximum mentors per page
 let currentPage = 0; // Start on the first page
@@ -338,7 +391,24 @@ function handleChatSubmit(event) {
 // Initialize the application
 function init() {
   createMentorCards();
-  window.onload = init;
+  const loginModal = document.getElementById('login-modal');
+  const closeModalButton = document.getElementById('close-modal');
+  const loginForm = document.getElementById('login-form');
+
+  const username = sessionStorage.getItem('username'); // Change to localStorage if needed
+  if (!username) {
+      // Show the login modal only if the user is not logged in
+      showLoginModal(loginModal);
+  } else {
+      // If the user is already logged in, update the welcome message
+      updateWelcomeMessage(username);
+  }
+
+  // Attach event listeners
+  attachCloseModalListeners(loginModal, closeModalButton);
+  if (loginForm) {
+      attachLoginFormListener(loginForm, loginModal);
+  }
   // Event listeners
   document.getElementById('left-arrow').addEventListener('click', () => handleArrowClick('prev'));
   document.getElementById('right-arrow').addEventListener('click', () => handleArrowClick('next'));
@@ -352,48 +422,59 @@ function init() {
 // Run the initialization when the DOM is fully loaded
 document.addEventListener('DOMContentLoaded', init);
 document.addEventListener("DOMContentLoaded", function () {
-  initBookingPage();
-  // The full content to be dynamically added with clear spacing and readability
-  const fullContent = `
-    <p>
-      The Department of Computer Science & Engineering (CSE) is dedicated to ensuring great careers for its students. For us, this means forging deeper industry linkages than ever before, creating a research culture from day one, and ensuring seamless education using the best technology available anywhere.
-    </p>
-    <p>
-      The excellent infrastructure, teaching faculty of the best kind of the Department ensures quality education such as interaction among students, parents, and staff. Along with a Training and Placement Cell, we ensure a bright future for our students.
-    </p>
-    <p>
-      We strongly encourage innovation in research, in teaching, and in service to the profession, the local community, and industry. Our faculty and students constantly strive to excel and advance the state of the art in Computer Science and Engineering.
-    </p>
-    <p>
-      I invite you to be part of our efforts as we propel the Department of Computer Science & Engineering to ever-greater heights.
-    </p>
-    <p>
-      In closing, I wish all the students and faculty a good academic career.
-    </p>
-    <p><strong>Sincerely, and with best wishes,<br>Prof. Birmohan Singh</strong></p>
-  `;
+  const loginModal = document.getElementById('login-modal');
+  const closeModalButton = document.getElementById('close-modal');
+  const loginForm = document.getElementById('login-form');
 
-  // Reference to the content and button
-  const infoContent = document.getElementById("info-content");
-  const toggleBtn = document.getElementById("toggle-info-btn");
+  // Attach event listeners
+  attachCloseModalListeners(loginModal, closeModalButton);
+  attachLoginFormListener(loginForm, loginModal);
+  const logoutButton = document.getElementById('logout-button');
 
-  // Load the initial content (first 200 characters with ellipsis)
-  infoContent.innerHTML = fullContent.substring(0, 200) + "...";
+  if (logoutButton) {
+      logoutButton.addEventListener('click', handleLogout);
+  }
+    // The full content to be dynamically added with clear spacing and readability
+    const fullContent = `
+      <p>
+        The Department of Computer Science & Engineering (CSE) is dedicated to ensuring great careers for its students. For us, this means forging deeper industry linkages than ever before, creating a research culture from day one, and ensuring seamless education using the best technology available anywhere.
+      </p>
+      <p>
+        The excellent infrastructure, teaching faculty of the best kind of the Department ensures quality education such as interaction among students, parents, and staff. Along with a Training and Placement Cell, we ensure a bright future for our students.
+      </p>
+      <p>
+        We strongly encourage innovation in research, in teaching, and in service to the profession, the local community, and industry. Our faculty and students constantly strive to excel and advance the state of the art in Computer Science and Engineering.
+      </p>
+      <p>
+        I invite you to be part of our efforts as we propel the Department of Computer Science & Engineering to ever-greater heights.
+      </p>
+      <p>
+        In closing, I wish all the students and faculty a good academic career.
+      </p>
+      <p><strong>Sincerely, and with best wishes,<br>Prof. Birmohan Singh</strong></p>
+    `;
 
-  // Toggle function for expanding and collapsing content
-  toggleBtn.addEventListener("click", function () {
-    if (infoContent.classList.contains("collapsed")) {
-      // Expand content with full HTML
-      infoContent.innerHTML = fullContent;
-      infoContent.classList.remove("collapsed");
-      infoContent.classList.add("expanded");
-      toggleBtn.textContent = "Read Less";
-    } else {
-      // Collapse content
-      infoContent.innerHTML = fullContent.substring(0, 200) + "...";
-      infoContent.classList.remove("expanded");
-      infoContent.classList.add("collapsed");
-      toggleBtn.textContent = "Read More";
-    }
+    // Reference to the content and button
+    const infoContent = document.getElementById("info-content");
+    const toggleBtn = document.getElementById("toggle-info-btn");
+
+    // Load the initial content (first 200 characters with ellipsis)
+    infoContent.innerHTML = fullContent.substring(0, 200) + "...";
+
+    // Toggle function for expanding and collapsing content
+    toggleBtn.addEventListener("click", function () {
+      if (infoContent.classList.contains("collapsed")) {
+          // Expand content with full HTML
+          infoContent.innerHTML = fullContent;
+          infoContent.classList.remove("collapsed");
+          infoContent.classList.add("expanded");
+          toggleBtn.textContent = "Read Less";
+      } else {
+          // Collapse content
+          infoContent.innerHTML = fullContent.substring(0, 200) + "...";
+          infoContent.classList.remove("expanded");
+          infoContent.classList.add("collapsed");
+          toggleBtn.textContent = "Read More";
+      }
   });
 });
